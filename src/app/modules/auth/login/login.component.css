@@ -1,0 +1,89 @@
+:host {
+  display: block;
+}
+
+mat-card {
+  border-radius: 0.6rem;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.08);
+}
+
+mat-card-content {
+  padding: 1.5rem;
+}
+
+mat-form-field {
+  width: 100% !important;
+  display: block !important;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.mat-mdc-text-field-wrapper {
+  padding-bottom: 1rem;
+}
+
+mat-icon[matPrefix] {
+  margin-right: 0.5rem;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: 0.5rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.block {
+  display: block;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: #dc2626 !important;
+}
+
+input:focus {
+  outline: none;
+}
+
+button mat-progress-spinner {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+button.w-full {
+  width: 100%;
+  display: block;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mat-form-field-prefix,
+.mat-mdc-form-field-prefix,
+.mat-form-field-suffix,
+.mat-mdc-form-field-suffix {
+  border-right: none !important;
+  box-shadow: none !important;
+}
+
+.mat-form-field-prefix::after,
+.mat-mdc-form-field-prefix::after,
+.mat-form-field-suffix::after,
+.mat-mdc-form-field-suffix::after {
+  display: none !important;
+  content: none !important;
+}
+
+.mat-mdc-form-field-outline-start,
+.mat-mdc-form-field-outline-end,
+.mat-form-field-outline-start,
+.mat-form-field-outline-end {
+  display: none !important;
+}
