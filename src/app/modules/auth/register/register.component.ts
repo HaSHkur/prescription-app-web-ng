@@ -33,13 +33,16 @@ import { MatSelectModule } from '@angular/material/select';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   loading = false;
   submitted = false;
   error = '';
   success = '';
-  roleSelectItems: { label: string; value: Role | null }[] = [];
+  roleSelectItems: { label: string; value: Role | null }[] = [
+    { label: 'Select Role', value: null }
+  ];
 
   constructor(
     private formBuilder: FormBuilder,

@@ -21,4 +21,8 @@ export class AuthServiceService {
   login(request: LoginRequest): Observable<Record<string, string>> {
     return this.http.post<Record<string, string>>(`${this.BASE_URL}${AUTH_ENDPOINTS.LOGIN}`, request);
   }
+
+  logout(): void {
+    localStorage.removeItem('token');
+  }
 }

@@ -1,0 +1,16 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.bg-orange {
+  background-color: #fb8c00;
+  color: white;
+}
+
+.no-prefix-separator .mat-mdc-form-field-flex::after {
+  display: none !important;
+}
+
+:host ::ng-deep .no-divider .mat-mdc-form-field-icon-suffix {
+    border-left: none !important;
+}

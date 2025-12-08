@@ -10,9 +10,8 @@ export interface LoginRequest {
 }
 
 export interface UserDomain {
-  id: number;
   username: string;
-  email: string;
+  role: string; 
 }
 
 export enum Role{

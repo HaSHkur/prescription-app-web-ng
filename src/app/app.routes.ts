@@ -3,6 +3,7 @@ import { LoginComponent } from './modules/auth/login/login.component';
 import { RegisterComponent } from './modules/auth/register/register.component';
 import { PrescriptionsListComponent } from './modules/prescriptions/list/prescriptions-list.component';
 import { AuthGuard } from './modules/auth/auth.guard';
+import { PrescriptionsFormComponent } from './modules/prescriptions/form/prescriptions-form.component';
 
 export const routes: Routes = [
     { 
@@ -24,7 +25,15 @@ export const routes: Routes = [
     children: [
       { 
         path: 'list', 
-        component: PrescriptionsListComponent  // other routes can be added here
+        component: PrescriptionsListComponent 
+      },
+      {
+        path: "create",
+        component: PrescriptionsFormComponent
+      },
+      {
+        path: "edit/:id",
+        component: PrescriptionsFormComponent
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' }
     ]
