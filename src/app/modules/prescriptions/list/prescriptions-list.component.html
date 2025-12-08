@@ -6,18 +6,8 @@
 
       <mat-toolbar color="primary" class="rounded mb-4">
 
-        <button mat-icon-button (click)="toggleSidebar()">
-          <mat-icon>app</mat-icon>
-        </button>
+      <span class="text-xl font-semibold ml-3">Prescriptions</span>
 
-        <span class="text-xl font-semibold ml-3">Prescriptions</span>
-
-        <span class="spacer"></span>
-
-        <button mat-raised-button color="accent" (click)="navigate('/dashboard')">Dashboard</button>
-        <button mat-raised-button color="primary" (click)="navigate('/prescriptions/create')">Add Prescription</button>
-        <button mat-raised-button color="warn" (click)="navigate('/medicines')">Medicines</button>
-        <button mat-raised-button color="accent" class="bg-orange" (click)="hangleLogout()">Log Out</button>
       </mat-toolbar>
 
       <div class="flex gap-4 items-end mb-4 w-full">

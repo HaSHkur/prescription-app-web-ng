@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenavContainer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -27,6 +27,7 @@ export class SidebarComponent {
   @Input() collapsed = false;
   @Output() toggle = new EventEmitter<void>();
   @Output() closeOnMobile = new EventEmitter<void>();
+  @ViewChild(MatSidenavContainer) sidenavContainer!: MatSidenavContainer;
 
   private breakpointObserver = inject(BreakpointObserver);
   private authService = inject(AuthServiceService);
@@ -46,6 +47,10 @@ export class SidebarComponent {
 
   onToggle() {
     this.toggle.emit();
+    // Small timeout to allow the Tailwind transition to initiate
+    setTimeout(() => {
+      this.sidenavContainer.updateContentMargins();
+    }, 0);
   }
 
   handleLinkClick() {

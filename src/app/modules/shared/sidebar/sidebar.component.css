@@ -53,3 +53,11 @@
     transform: translateX(0);
   }
 }
+
+::ng-deep .mat-drawer-content {
+  transition: margin-left 300ms ease-in-out !important;
+}
+
+::ng-deep .mat-drawer {
+  transition: width 300ms ease-in-out !important;
+}

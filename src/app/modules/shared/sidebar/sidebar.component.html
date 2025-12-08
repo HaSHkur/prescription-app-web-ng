@@ -4,16 +4,18 @@
                [opened]="!(isHandset$ | async)"
                [class.w-64]="!collapsed"
                [class.w-20]="collapsed"
-               class="border-r border-gray-200 transition-all duration-300">
+               class="border-r border-gray-200 transition-all duration-300 ease-in-out">
     
     <div class="flex flex-col h-full bg-white">
       
       <div class="p-4 flex items-center justify-between border-b">
         <div class="flex items-center gap-3">
-          <span *ngIf="!collapsed" class="text-2xl">🟦</span>
-          <span *ngIf="!collapsed" class="font-bold text-lg text-indigo-600">Prescription Assistant</span>
+          <span class="text-2xl">
+            <mat-icon class="text-indigo-600" (click)="onToggle()">medical_services</mat-icon>
+          </span>
+          <span *ngIf="!collapsed" class="font-bold text-lg text-indigo-600">My Prescription</span>
         </div>
-        <button (click)="onToggle()" class="p-2 hover:bg-gray-100 rounded-lg">
+        <button (click)="onToggle()" class="p-2 hover:bg-gray-100 rounded-lg" *ngIf="!collapsed" >
           <mat-icon>{{ collapsed ? 'menu' : 'menu_open' }}</mat-icon>
         </button>
       </div>
@@ -42,15 +44,14 @@
             Made by Ankur
             </div>
         </div>
-        </div>
+      </div>
 
       <div *ngIf="!collapsed" class="p-4 border-t text-xs text-gray-400">
         Ankur
       </div>
-    </div>
-  </mat-sidenav>
+    </div></mat-sidenav>
 
-  <mat-sidenav-content class="bg-white">
+  <mat-sidenav-content class="transition-all duration-300 ease-in-out">
     <header *ngIf="isHandset$ | async" class="flex items-center p-4 border-b bg-white lg:hidden">
       <button (click)="drawer.toggle()" class="p-2">
         <mat-icon>menu</mat-icon>
