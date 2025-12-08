@@ -40,8 +40,4 @@ export class PrescriptionsServiceService {
   deletePrescription(id: string) {
     return this.http.delete<any>(`${this.BASE_URL}${PRESCRIPTION_ENDPOINTS.DELETE.replace('{id}', id)}`);
   }
-
-  countPrescriptions() {
-    return this.http.get<any>(`${this.BASE_URL}${PRESCRIPTION_ENDPOINTS.COUNT}`);
-  }
 }

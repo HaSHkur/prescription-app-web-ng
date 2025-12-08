@@ -1,1 +1,58 @@
-<p>prescriptions-details works!</p>
+<mat-card class="max-w-2xl mx-auto overflow-hidden shadow-md border border-gray-100" style="margin-top: 50px;">
+  <mat-card-header class="bg-slate-50 p-6 flex items-center border-b">
+    <div mat-card-avatar class="flex items-center justify-center bg-indigo-100 text-indigo-700 rounded-full w-12 h-12">
+      <mat-icon>medical_services</mat-icon>
+    </div>
+    <mat-card-title class="text-xl font-bold ml-4">
+      Prescription #{{ prescriptionDetails?.id }}
+    </mat-card-title>
+    <mat-card-subtitle class="ml-4">
+      Date: {{ prescriptionDetails?.prescriptionDate | date:'mediumDate' }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="p-6" style="margin-top: 20px;">
+    <div class="grid grid-cols-2 gap-6 mb-6">
+      <div>
+        <label class="text-xs font-semibold uppercase text-gray-400 block mb-1">Patient Name</label>
+        <p class="text-lg font-medium text-gray-800">{{ prescriptionDetails?.patientName }}</p>
+      </div>
+      <div>
+        <label class="text-xs font-semibold uppercase text-gray-400 block mb-1">Gender / Age</label>
+        <p class="text-lg font-medium text-gray-800">{{ prescriptionDetails?.patientGender }} / {{ prescriptionDetails?.patientAge }} yrs</p>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="my-6">
+      <div class="flex items-center gap-2 mb-2">
+        <mat-icon class="text-indigo-600 scale-90">fact_check</mat-icon>
+        <label class="font-bold text-gray-700">Diagnosis</label>
+      </div>
+      <p class="text-gray-600 leading-relaxed bg-gray-50 p-4 rounded-lg italic">
+        "{{ prescriptionDetails?.diagnosis }}"
+      </p>
+    </div>
+
+    <div class="my-6">
+      <div class="flex items-center gap-2 mb-3">
+        <mat-icon class="text-indigo-600 scale-90">medication</mat-icon>
+        <label class="font-bold text-gray-700">Prescribed Medicines</label>
+      </div>
+      <p class="text-gray-600 leading-relaxed bg-gray-50 p-4 rounded-lg italic">
+        "{{ prescriptionDetails?.medicines }}"
+      </p>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="mt-6 flex items-center justify-between bg-indigo-50 p-4 rounded-lg">
+      <div class="flex items-center gap-2 text-indigo-800">
+        <mat-icon>event</mat-icon>
+        <span class="font-semibold">Follow-up Visit:</span>
+      </div>
+      <span class="font-bold text-indigo-900">{{prescriptionDetails?.nextVisitDate | date:'fullDate' }}</span>
+    </div>
+  </mat-card-content>
+</mat-card>

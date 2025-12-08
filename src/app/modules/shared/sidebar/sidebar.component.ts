@@ -42,7 +42,7 @@ export class SidebarComponent {
   nav: NavItem[] = [
     { label: 'Home', icon: 'home', path: '/prescriptions' },
     { label: 'Add Prescription', icon: 'add_circle', path: '/prescriptions/create' },
-    { label: 'Report', icon: 'assessment', path: '/settings' }
+    { label: 'Report', icon: 'bar_chart_4_bars', path: '/report/chart' },
   ];
 
   onToggle() {
