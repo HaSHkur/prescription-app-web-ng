@@ -1,1 +1,12 @@
-<router-outlet />
+
+<div *ngIf="showSidebar$ | async; else cleanLayout">
+  <app-sidebar [collapsed]="isSidebarCollapsed" (toggle)="toggleSidebar()">
+    <router-outlet />
+</app-sidebar>
+</div>
+
+<ng-template #cleanLayout>
+  <main class="min-h-screen w-full bg-gray-50">
+    <router-outlet />
+  </main>
+</ng-template>

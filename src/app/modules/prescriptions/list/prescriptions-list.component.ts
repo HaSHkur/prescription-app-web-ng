@@ -3,7 +3,7 @@ import { AuthModule } from '../../auth/auth.module';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PrescriptionSummary } from '../../../models/prescription.model';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthServiceService } from '../../../services/auth/auth-service.service';
 import { PrescriptionsServiceService } from '../../../services/prescriptions/prescriptions-service.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,6 +16,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTableModule } from '@angular/material/table';
+import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-prescriptions-list',
@@ -32,7 +34,9 @@ import { MatTableModule } from '@angular/material/table';
     MatCardModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
-    MatTableModule
+    MatTableModule,
+    RouterModule,
+    MatSidenavModule
   ],
   templateUrl: './prescriptions-list.component.html',
   styleUrl: './prescriptions-list.component.css'
@@ -44,6 +48,7 @@ export class PrescriptionsListComponent {
   error: string = '';
 
   displayedColumns: string[] = ['id', 'date', 'patient', 'age'];
+sidebarOpened: boolean = true;
 
 
   constructor(
@@ -123,5 +128,24 @@ export class PrescriptionsListComponent {
   logout(): void {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+  }
+
+  collapsed = false;
+  mobileOpen = false;
+
+  toggleSidebar() {
+    this.collapsed = !this.collapsed;
+  }
+
+  closeMobileSidebar() {
+    this.mobileOpen = false;
+  }
+
+  toggleMobile() {
+    this.mobileOpen = !this.mobileOpen;
+  }
+
+  onNavLinkClicked() {
+    this.closeMobileSidebar();
   }
 }

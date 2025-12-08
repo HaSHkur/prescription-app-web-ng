@@ -13,11 +13,13 @@ export const routes: Routes = [
     },
     { 
         path: 'login', 
-        component: LoginComponent 
+        component: LoginComponent,
+        data: { hideSidebar: true }
     },
     { 
         path: 'register', 
-        component: RegisterComponent 
+        component: RegisterComponent,
+        data: { hideSidebar: true }
     },
     {
     path: 'prescriptions',
