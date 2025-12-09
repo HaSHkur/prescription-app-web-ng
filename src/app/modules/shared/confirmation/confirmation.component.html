@@ -1,0 +1,44 @@
+<div class="p-4 rounded-lg">
+  
+  <div class="flex items-center space-x-4 mb-4" [ngClass]="{
+    'text-red-600': data.type === 'warn',
+    'text-blue-600': data.type === 'info'
+  }">
+    <i class="material-icons text-3xl">
+      {{ data.type === 'warn' ? 'warning' : 'info' }}
+    </i>
+
+    <h2 mat-dialog-title class="text-xl font-bold m-0" [ngClass]="{
+      'text-red-700': data.type === 'warn',
+      'text-gray-900': data.type === 'info'
+    }">
+      {{ data.title }}
+    </h2>
+  </div>
+
+  <mat-dialog-content class="mb-6 text-gray-700">
+    <p class="m-0">
+      {{ data.message }}
+    </p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="space-x-2">
+    
+    <button 
+      mat-stroked-button 
+      [mat-dialog-close]="false"
+      class="border-gray-300 hover:bg-gray-100 transition-colors duration-150"
+    >
+      {{ data.cancelText }}
+    </button>
+    
+    <button 
+      mat-flat-button
+      [mat-dialog-close]="true"
+      [color]="data.type === 'warn' ? 'warn' : 'primary'"
+    >
+      {{ data.confirmText }}
+    </button>
+  </mat-dialog-actions>
+
+</div>

@@ -41,18 +41,19 @@
     <div #chartContainer class="overflow-x-auto overflow-y-hidden pb-4 custom-scrollbar">
       <div [style.width.px]="chartWidth()" class="h-[350px]">
         <ngx-charts-bar-vertical
-            [results]="chartData()"
-            [xAxis]="true"
-            [yAxis]="true"
-            [showXAxisLabel]="false"
-            [showYAxisLabel]="true"
-            [yAxisLabel]="'Count'"
-            [animations]="true"
-            [scheme]="'vivid'"
-            [barPadding]="24"
-            [yScaleMin]="0"
-            [showGridLines]="true">
+          [results]="chartData()"
+          [xAxis]="true"
+          [yAxis]="true"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="true"
+          [yAxisLabel]="'Count'"
+          [animations]="true"
+          [scheme]="'vivid'"
+          [barPadding]="24"
+          [yScaleMin]="0"
+          [showGridLines]="true">
         </ngx-charts-bar-vertical>
+            
       </div>
     </div>
   </div>

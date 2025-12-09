@@ -1,15 +1,37 @@
 <mat-card class="max-w-2xl mx-auto overflow-hidden shadow-md border border-gray-100" style="margin-top: 50px;">
   <mat-card-header class="bg-slate-50 p-6 flex items-center border-b">
-    <div mat-card-avatar class="flex items-center justify-center bg-indigo-100 text-indigo-700 rounded-full w-12 h-12">
-      <mat-icon>medical_services</mat-icon>
-    </div>
-    <mat-card-title class="text-xl font-bold ml-4">
+
+  <!-- Avatar -->
+  <div mat-card-avatar
+       class="flex items-center justify-center bg-indigo-100 text-indigo-700 rounded-full w-12 h-12">
+    <mat-icon>medical_services</mat-icon>
+  </div>
+
+  <!-- Title & Subtitle Container -->
+  <div class="ml-4">
+    <mat-card-title class="text-xl font-bold">
       Prescription #{{ prescriptionDetails?.id }}
     </mat-card-title>
-    <mat-card-subtitle class="ml-4">
+    <mat-card-subtitle>
       Date: {{ prescriptionDetails?.prescriptionDate | date:'mediumDate' }}
     </mat-card-subtitle>
-  </mat-card-header>
+  </div>
+
+  <!-- Spacer pushes buttons to the right -->
+  <span class="flex-1"></span>
+
+  <!-- Actions (buttons) -->
+  <div class="flex gap-2">
+    <button mat-stroked-button color="primary" (click)="editPrescription()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-flat-button color="warn" (click)="onDelete()">
+     <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+</mat-card-header>
+
 
   <mat-card-content class="p-6" style="margin-top: 20px;">
     <div class="grid grid-cols-2 gap-6 mb-6">
@@ -56,3 +78,6 @@
     </div>
   </mat-card-content>
 </mat-card>
+
+
+
