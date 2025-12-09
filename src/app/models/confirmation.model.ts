@@ -3,5 +3,5 @@ export interface ConfirmationDialogData {
   message: string;
   confirmText: string;
   cancelText: string;
-  type: 'warn' | 'info'; // For color/icon styling
+  type: 'warn' | 'info';
 }

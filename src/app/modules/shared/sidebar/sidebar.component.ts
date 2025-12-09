@@ -47,7 +47,6 @@ export class SidebarComponent {
 
   onToggle() {
     this.toggle.emit();
-    // Small timeout to allow the Tailwind transition to initiate
     setTimeout(() => {
       this.sidenavContainer.updateContentMargins();
     }, 0);
