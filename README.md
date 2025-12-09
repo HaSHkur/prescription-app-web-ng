@@ -31,7 +31,7 @@ This is a web application for managing medical prescriptions, built with Angular
 
 1.  Clone the repository:
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/HaSHkur/prescription-app-web-ng
     ```
 2.  Navigate to the project directory:
     ```bash
