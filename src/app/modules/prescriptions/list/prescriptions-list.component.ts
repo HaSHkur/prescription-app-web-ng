@@ -65,8 +65,8 @@ export class PrescriptionsListComponent {
   ) {}
 
   ngOnInit(): void {
-    this.loadAllPrescriptions();
     this.prepareSearchForm();
+    this.loadPrescriptions(true);
   }
 
   prepareSearchForm(): void {
@@ -76,20 +76,13 @@ export class PrescriptionsListComponent {
     });
   }
 
-  loadAllPrescriptions(): void {
-    this.prescriptionsService.getAllPrescriptions(this.currentPage, this.pageSize).subscribe({
-      next: (data) => {
-        this.prescriptions = data.content || [];
-        this.totalElements = data.totalElements || 0;
-        this.totalPages = data.totalPages || 0;
-      },
-      error: (error) => {
-        console.error('Error fetching prescriptions:', error);
-      }
-    });
-  }
+  loadPrescriptions(isInitialSearch?:boolean): void {
 
-  searchPrescriptions(): void {
+    if (isInitialSearch) {
+      this.getAllPrescriptions();
+      return;
+    }
+
     this.error = '';
 
     const fromValue = this.searchForm.get('fromDate')?.value;
@@ -106,8 +99,12 @@ export class PrescriptionsListComponent {
     if (toDate < fromDate) {
       this.error = 'To Date must be after From Date.';
       return;
-    }
+    } 
 
+    this.searchPrescriptions(fromDate, toDate);
+  }
+
+  searchPrescriptions(fromDate:Date, toDate:Date): void {
     this.prescriptionsService.getAllPrescriptionsByDateRange(fromDate, toDate, this.currentPage, this.pageSize).subscribe({
       next: (data) => {
         this.prescriptions = data?.content || [];
@@ -120,17 +117,39 @@ export class PrescriptionsListComponent {
     });
   }
 
+  getAllPrescriptions(): void {
+    this.prescriptionsService.getAllPrescriptions(this.currentPage, this.pageSize).subscribe({
+      next: (data) => {
+        this.prescriptions = data.content || [];
+        this.totalElements = data.totalElements || 0;
+        this.totalPages = data.totalPages || 0;
+      },
+      error: (error) => {
+        console.error('Error fetching prescriptions:', error);
+      }
+    });
+  }
+
   resetSearch(): void {
     this.searchForm.reset();
     this.error = '';
     this.currentPage = 0;
-    this.loadAllPrescriptions();
+    this.loadPrescriptions();
   }
 
   pageChanged(event: PageEvent): void {
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.loadAllPrescriptions();
+    const fromValue = this.searchForm.get('fromDate')?.value;
+    const toValue = this.searchForm.get('toDate')?.value;
+
+    if (fromValue && toValue) {
+      const fromDate = new Date(fromValue);
+      const toDate = new Date(toValue);
+      this.searchPrescriptions(fromDate, toDate);
+    } else {
+      this.getAllPrescriptions();
+    }
   }
 
   navigate(path: string): void {

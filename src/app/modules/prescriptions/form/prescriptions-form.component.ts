@@ -102,8 +102,23 @@ export class PrescriptionsFormComponent implements OnInit{
     });
   }
 
+  validateNextVisitDate(): void {
+    const prescriptionDate = this.prescriptionForm.get('prescriptionDate')?.value;
+    const nextVisitDate = this.prescriptionForm.get('nextVisitDate')?.value;
+
+    if (nextVisitDate && prescriptionDate && new Date(nextVisitDate) <= new Date(prescriptionDate)) {
+      this.prescriptionForm.get('nextVisitDate')?.setErrors({ invalidNextVisitDate: true });
+    }else {
+      this.prescriptionForm.get('nextVisitDate')?.setErrors(null);
+    }
+  }
+
   resetForm(){
     this.prescriptionForm.reset();
+    this.prescriptionForm.markAsPristine();
+    this.prescriptionForm.markAsUntouched();
+    this.prescriptionForm.get('prescriptionDate')?.setValue(new Date());
+    this.prescriptionForm.updateValueAndValidity();
   }
 
   goBack(): void {
