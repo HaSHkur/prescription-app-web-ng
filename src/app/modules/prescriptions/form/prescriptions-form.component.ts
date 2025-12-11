@@ -75,18 +75,26 @@ export class PrescriptionsFormComponent implements OnInit{
     this.genderSelectItems.push(...genders);
   }
 
-  preparePrescriptionForm(data?:Prescription): void {
+  preparePrescriptionForm(data?: Prescription): void {
     this.prescriptionForm = this.formBuilder.group({
       prescriptionDate: [data?.prescriptionDate ?? new Date(), [Validators.required]],
       patientName: [data?.patientName ?? '', [Validators.required]],
       patientAge: [
-        data?.patientAge ?? '', 
+        data?.patientAge ?? '',
         [Validators.required, Validators.min(.0001), Validators.max(120), Validators.pattern('^[0-9]*$')]
       ],
       patientGender: [data?.patientGender ?? '', [Validators.required]],
       diagnosis: [data?.diagnosis ?? ''],
       medicines: [data?.medicines ?? ''],
       nextVisitDate: [data?.nextVisitDate ?? '']
+    });
+
+    this.prescriptionForm.get('prescriptionDate')?.valueChanges.subscribe(() => {
+      this.validateNextVisitDate();
+    });
+
+    this.prescriptionForm.get('nextVisitDate')?.valueChanges.subscribe(() => {
+      this.validateNextVisitDate();
     });
   }
 

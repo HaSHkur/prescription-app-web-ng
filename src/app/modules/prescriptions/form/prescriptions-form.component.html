@@ -61,11 +61,11 @@
 
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Next Visit Date (Optional)</mat-label>
-        <input matInput [matDatepicker]="nextVisitPicker" formControlName="nextVisitDate" (dateChange)="validateNextVisitDate()">
+        <input matInput [matDatepicker]="nextVisitPicker" formControlName="nextVisitDate">
         <mat-datepicker-toggle matSuffix [for]="nextVisitPicker"></mat-datepicker-toggle>
         <mat-datepicker #nextVisitPicker></mat-datepicker>
-        <mat-error *ngIf="prescriptionForm.get('patientGender')?.hasError('invalidNextVisitDate')">
-          Next visit date cannot be earlier than prescription date.
+        <mat-error *ngIf="prescriptionForm.get('nextVisitDate')?.hasError('invalidNextVisitDate')">
+          Next visit date must be after prescription date.
         </mat-error>
       </mat-form-field>
     </div>
