@@ -17,14 +17,20 @@ export class PrescriptionsServiceService {
     return this.http.post<any>( `${ this.BASE_URL }${ PRESCRIPTION_ENDPOINTS.CREATE }`, request );
   }
 
-  getAllPrescriptions() {
-    return this.http.get<any>(`${this.BASE_URL}${PRESCRIPTION_ENDPOINTS.GET_ALL}`);
+  getAllPrescriptions(page: number, size: number): Observable<any> {
+    const params = {
+      page: page.toString(),
+      size: size.toString()
+    };
+    return this.http.get<any>(`${this.BASE_URL}${PRESCRIPTION_ENDPOINTS.GET_ALL}`, { params });
   }
 
-  getAllPrescriptionsByDateRange(fromDate: Date, toDate: Date): Observable<any> {
+  getAllPrescriptionsByDateRange(fromDate: Date, toDate: Date, page: number, size: number): Observable<any> {
     const params = {
       fromDate: fromDate.toISOString(),
-      toDate: toDate.toISOString()
+      toDate: toDate.toISOString(),
+      page: page.toString(),
+      size: size.toString()
     };
     return this.http.get<any>(`${this.BASE_URL}${PRESCRIPTION_ENDPOINTS.GET_ALL}`, { params });
   }

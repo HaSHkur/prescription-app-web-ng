@@ -16,8 +16,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTableModule } from '@angular/material/table';
-import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { PageEvent, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-prescriptions-list',
@@ -36,7 +36,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatDatepickerModule,
     MatTableModule,
     RouterModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatPaginatorModule
   ],
   templateUrl: './prescriptions-list.component.html',
   styleUrl: './prescriptions-list.component.css'
@@ -47,8 +48,13 @@ export class PrescriptionsListComponent {
   searchForm!: FormGroup;
   error: string = '';
 
+  totalElements: number = 0;
+  totalPages: number = 0;
+  currentPage: number = 0;
+  pageSize: number = 5;
+
   displayedColumns: string[] = ['id', 'date', 'patient', 'age'];
-sidebarOpened: boolean = true;
+  sidebarOpened: boolean = true;
 
 
   constructor(
@@ -71,9 +77,11 @@ sidebarOpened: boolean = true;
   }
 
   loadAllPrescriptions(): void {
-    this.prescriptionsService.getAllPrescriptions().subscribe({
+    this.prescriptionsService.getAllPrescriptions(this.currentPage, this.pageSize).subscribe({
       next: (data) => {
         this.prescriptions = data.content || [];
+        this.totalElements = data.totalElements || 0;
+        this.totalPages = data.totalPages || 0;
       },
       error: (error) => {
         console.error('Error fetching prescriptions:', error);
@@ -88,7 +96,7 @@ sidebarOpened: boolean = true;
     const toValue = this.searchForm.get('toDate')?.value;
 
     if (!fromValue || !toValue) {
-      this.error = 'Both From Date and To Date are required.';
+      this.error = 'Both From Date and To Date are required for search.';
       return;
     }
 
@@ -100,9 +108,11 @@ sidebarOpened: boolean = true;
       return;
     }
 
-    this.prescriptionsService.getAllPrescriptionsByDateRange(fromDate, toDate).subscribe({
+    this.prescriptionsService.getAllPrescriptionsByDateRange(fromDate, toDate, this.currentPage, this.pageSize).subscribe({
       next: (data) => {
         this.prescriptions = data?.content || [];
+        this.totalElements = data.totalElements || 0;
+        this.totalPages = data.totalPages || 0;
       },
       error: (error) => {
         console.error('Error searching prescriptions:', error);
@@ -113,6 +123,13 @@ sidebarOpened: boolean = true;
   resetSearch(): void {
     this.searchForm.reset();
     this.error = '';
+    this.currentPage = 0;
+    this.loadAllPrescriptions();
+  }
+
+  pageChanged(event: PageEvent): void {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
     this.loadAllPrescriptions();
   }
 
