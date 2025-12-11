@@ -17,6 +17,10 @@ export class PrescriptionsServiceService {
     return this.http.post<any>( `${ this.BASE_URL }${ PRESCRIPTION_ENDPOINTS.CREATE }`, request );
   }
 
+  updatePrescription(request: Prescription) {
+    return this.http.put<any>( `${ this.BASE_URL }${ PRESCRIPTION_ENDPOINTS.UPDATE }`, request );
+  }
+
   getAllPrescriptions(page: number, size: number): Observable<any> {
     const params = {
       page: page.toString(),
@@ -37,10 +41,6 @@ export class PrescriptionsServiceService {
 
   getPrescriptionById(id: number) {
     return this.http.get<Prescription>(`${this.BASE_URL}${PRESCRIPTION_ENDPOINTS.GET_BY_ID.replace('{id}', id.toString())}`);
-  }
-
-  updatePrescription(id: string) {
-    return this.http.put<any>(`${this.BASE_URL}${PRESCRIPTION_ENDPOINTS.UPDATE.replace('{id}', id)}`, {});
   }
 
   deletePrescription(id: string) {

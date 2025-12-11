@@ -51,7 +51,7 @@ export class PrescriptionsListComponent {
   totalElements: number = 0;
   totalPages: number = 0;
   currentPage: number = 0;
-  pageSize: number = 5;
+  pageSize: number = 10;
 
   displayedColumns: string[] = ['id', 'date', 'patient', 'age'];
   sidebarOpened: boolean = true;

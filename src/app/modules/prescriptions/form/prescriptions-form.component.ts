@@ -16,6 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Prescription } from '../../../models/prescription.model';
 import { PrescriptionsServiceService } from '../../../services/prescriptions/prescriptions-service.service';
 import { MatSelectModule } from '@angular/material/select';
+import { id } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-prescriptions-form',
@@ -77,6 +78,7 @@ export class PrescriptionsFormComponent implements OnInit{
 
   preparePrescriptionForm(data?: Prescription): void {
     this.prescriptionForm = this.formBuilder.group({
+      id: [data?.id ?? null],
       prescriptionDate: [data?.prescriptionDate ?? new Date(), [Validators.required]],
       patientName: [data?.patientName ?? '', [Validators.required]],
       patientAge: [
@@ -140,12 +142,27 @@ export class PrescriptionsFormComponent implements OnInit{
 
     const prescriptionData: Prescription = this.prescriptionForm.value;
 
+    prescriptionData.id ? this.updatePrescription(prescriptionData.id, prescriptionData) : this.createPrescription(prescriptionData);
+  }
+
+  createPrescription(prescriptionData: Prescription): void {
     this.prescriptionsService.createPrescription(prescriptionData).subscribe({
-      next: (response) => {
+      next: (data) => {
         this.router.navigate(['/prescriptions/list']);
       },
       error: (error) => {
         console.error('Error creating prescription:', error);
+      }
+    });
+  }
+
+  updatePrescription(id: number, prescriptionData: Prescription): void {
+    this.prescriptionsService.updatePrescription(prescriptionData).subscribe({
+      next: (data) => {
+        this.router.navigate(['/prescriptions/list']);
+      },
+      error: (error) => {
+        console.error('Error updating prescription:', error);
       }
     });
   }
