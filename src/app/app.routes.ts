@@ -25,7 +25,8 @@ export const routes: Routes = [
     },
     {
     path: 'prescriptions',
-    canActivate: [AuthGuard], 
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard], 
     children: [
       { 
         path: 'list', 
@@ -49,6 +50,7 @@ export const routes: Routes = [
   {
     path: 'report',
     canActivate: [AuthGuard], 
+    canActivateChild: [AuthGuard],
     children: [
       { path: '', redirectTo: 'chart', pathMatch: 'full' },
       {
